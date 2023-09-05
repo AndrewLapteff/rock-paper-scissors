@@ -1,0 +1,19 @@
+.container {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90vh;
+}
+.title {
+  background-color: #fff;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+h1 {
+  font-size: 1rem;
+  color: #000;
+}
