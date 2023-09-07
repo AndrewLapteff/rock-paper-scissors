@@ -12,5 +12,6 @@
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 5%;
 }

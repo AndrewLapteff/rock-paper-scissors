@@ -4,12 +4,13 @@ import s from './Hand.module.css'
 interface Props {
   name: string
   icon: JSX.Element
+  onClick: () => void
 }
 
-const Hand: FC<Props> = ({ name, icon }) => {
+const Hand: FC<Props> = ({ name, icon, onClick }) => {
   return (
     <>
-      <button className={s.button}>
+      <button onClick={onClick} className={s.button}>
         {icon}
         {name}
       </button>

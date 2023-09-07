@@ -1,20 +1,29 @@
 import Hand from '../components/Hand'
+import { useAppContext } from '../context/AppContext'
+import { Actions } from '../context/reducers/reducerActions'
 import s from './RockPaperScissors.module.css'
 
-import {
-  FaRegHandPaper,
-  FaRegHandRock,
-  FaRegHandScissors,
-} from 'react-icons/fa'
-
 const RockPaperScissors = () => {
+  const context = useAppContext()
+
+  const hands = context.hands.map((hand) => {
+    return (
+      <Hand
+        onClick={() => {
+          context.dispatch({
+            payload: hand.name,
+            type: Actions.CHOOSE_THE_HAND,
+          })
+        }}
+        icon={hand.icon}
+        name={hand.name}
+        key={hand.name}
+      />
+    )
+  })
   return (
     <div className={s.container}>
-      <div className={s.hands}>
-        <Hand name="rock" icon={<FaRegHandRock size={60} />} />
-        <Hand name="paper" icon={<FaRegHandPaper size={60} />} />
-        <Hand name="scissors" icon={<FaRegHandScissors size={60} />} />
-      </div>
+      <div className={s.hands}>{hands}</div>
       <button className={s.playBtn}>Play</button>
     </div>
   )
