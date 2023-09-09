@@ -5,7 +5,7 @@ import {
   FaRegHandScissors,
 } from 'react-icons/fa'
 import { HandsOptions, IContext, ContextProviderProps } from './AppContextTypes'
-import { reducer } from './reducers/reducer'
+import { scoreReducer } from './reducers/scoreReducer'
 import { initialState } from './reducers/initialState'
 
 const hands = [
@@ -20,7 +20,7 @@ export const AppContext = createContext<IContext>({
   dispatch: () => {},
 })
 export const ContextProvider: FC<ContextProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(scoreReducer, initialState)
   const context = {
     hands,
     state,

@@ -5,7 +5,8 @@ import s from './RockPaperScissors.module.css'
 
 const RockPaperScissors = () => {
   const context = useAppContext()
-
+  const selectedHand = context.state.playerHand
+  console.log(selectedHand)
   const hands = context.hands.map((hand) => {
     return (
       <Hand
@@ -15,6 +16,7 @@ const RockPaperScissors = () => {
             type: Actions.CHOOSE_THE_HAND,
           })
         }}
+        selected={selectedHand}
         icon={hand.icon}
         name={hand.name}
         key={hand.name}
