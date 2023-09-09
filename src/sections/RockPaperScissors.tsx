@@ -1,19 +1,19 @@
 import Hand from '../components/Hand'
 import { useAppContext } from '../context/AppContext'
 import { Actions } from '../context/reducers/reducerActions'
+import { randomHandOptions } from '../utils/randomHand'
 import s from './RockPaperScissors.module.css'
 
 const RockPaperScissors = () => {
-  const context = useAppContext()
-  const selectedHand = context.state.playerHand
-  console.log(selectedHand)
-  const hands = context.hands.map((hand) => {
+  const { dispatch, state, hands } = useAppContext()
+  const selectedHand = state.playerHand
+  const handsOnThePage = hands.map((hand) => {
     return (
       <Hand
         onClick={() => {
-          context.dispatch({
+          dispatch({
             payload: hand.name,
-            type: Actions.CHOOSE_THE_HAND,
+            type: Actions.CHOOSE_THE_PLAYERS_HAND,
           })
         }}
         selected={selectedHand}
@@ -23,10 +23,20 @@ const RockPaperScissors = () => {
       />
     )
   })
+
+  const play = () => {
+    dispatch({
+      type: Actions.CHOOSE_THE_COMPUTERS_HAND,
+      payload: randomHandOptions(),
+    })
+  }
+
   return (
     <div className={s.container}>
-      <div className={s.hands}>{hands}</div>
-      <button className={s.playBtn}>Play</button>
+      <div className={s.hands}>{handsOnThePage}</div>
+      <button onClick={play} className={s.playBtn}>
+        Play
+      </button>
     </div>
   )
 }

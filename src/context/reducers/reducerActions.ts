@@ -1,10 +1,16 @@
 export enum Actions {
-  CHOOSE_THE_HAND = 'CHOOSE_THE_HAND'
+  CHOOSE_THE_PLAYERS_HAND = 'CHOOSE_THE_PLAYERS_HAND',
+  CHOOSE_THE_COMPUTERS_HAND = 'CHOOSE_THE_COMPUTERS_HAND'
 }
 
-interface ChooseHandAction {
-  type: Actions.CHOOSE_THE_HAND
+interface ChoosePlayersHandAction {
+  type: Actions.CHOOSE_THE_PLAYERS_HAND
   payload: string
 }
 
-export type IAction = ChooseHandAction 
+interface ChooseComputersHandAction {
+  type: Actions.CHOOSE_THE_COMPUTERS_HAND
+  payload: string
+}
+
+export type IAction = ChoosePlayersHandAction | ChooseComputersHandAction
