@@ -40,3 +40,15 @@
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
 }
+.timer {
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timer p {
+  color: #fff;
+  font-size: 5rem;
+  font-weight: bold;
+  user-select: none;
+}

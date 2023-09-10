@@ -10,5 +10,8 @@ export function scoreReducer(state: StateType, action: IAction) {
     case Actions.CHOOSE_THE_COMPUTERS_HAND: {
       return { ...state, computerHand: payload }
     }
+    case Actions.SET_TIMER: {
+      return { ...state, runTimer: payload }
+    }
   }
 }

@@ -29,6 +29,7 @@ const RockPaperScissors = () => {
       type: Actions.CHOOSE_THE_COMPUTERS_HAND,
       payload: randomHandOptions(),
     })
+    dispatch({ type: Actions.SET_TIMER, payload: true })
   }
 
   return (

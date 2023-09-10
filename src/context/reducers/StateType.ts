@@ -8,4 +8,5 @@ export interface StateType {
   computerHand: string
   winner: string
   score: IScore
+  runTimer: boolean
 }
