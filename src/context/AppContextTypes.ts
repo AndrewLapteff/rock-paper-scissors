@@ -1,4 +1,4 @@
-import { IAction } from "./reducers/reducerActions"
+import { ActionTypes } from "./reducers/reducerActions"
 import { StateType } from "./reducers/StateType"
 
 export enum HandsOptions {
@@ -15,7 +15,7 @@ export interface IHands {
 export interface IContext {
   hands: IHands[]
   state: StateType,
-  dispatch: React.Dispatch<IAction>
+  dispatch: React.Dispatch<ActionTypes>
 }
 
 export interface ContextProviderProps {

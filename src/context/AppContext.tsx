@@ -9,9 +9,18 @@ import { scoreReducer } from './reducers/scoreReducer'
 import { initialState } from './reducers/initialState'
 
 const hands = [
-  { name: HandsOptions.paper, icon: <FaRegHandPaper size={60} /> },
-  { name: HandsOptions.rock, icon: <FaRegHandRock size={60} /> },
-  { name: HandsOptions.scissors, icon: <FaRegHandScissors size={60} /> },
+  {
+    name: HandsOptions.paper,
+    icon: <FaRegHandPaper data-testid="paperHand" size={60} />,
+  },
+  {
+    name: HandsOptions.rock,
+    icon: <FaRegHandRock data-testid="rockHand" size={60} />,
+  },
+  {
+    name: HandsOptions.scissors,
+    icon: <FaRegHandScissors data-testid="scissorsHand" size={60} />,
+  },
 ]
 
 export const AppContext = createContext<IContext>({

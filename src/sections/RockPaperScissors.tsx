@@ -1,6 +1,6 @@
 import Hand from '../components/Hand'
 import { useAppContext } from '../context/AppContext'
-import { Actions } from '../context/reducers/reducerActions'
+import { ActionOptions } from '../context/reducers/reducerActions'
 import { randomHandOptions } from '../utils/randomHand'
 import s from './RockPaperScissors.module.css'
 
@@ -13,7 +13,7 @@ const RockPaperScissors = () => {
         onClick={() => {
           dispatch({
             payload: hand.name,
-            type: Actions.CHOOSE_THE_PLAYERS_HAND,
+            type: ActionOptions.CHOOSE_THE_PLAYERS_HAND,
           })
         }}
         selected={selectedHand}
@@ -26,16 +26,20 @@ const RockPaperScissors = () => {
 
   const play = () => {
     dispatch({
-      type: Actions.CHOOSE_THE_COMPUTERS_HAND,
+      type: ActionOptions.CHOOSE_THE_COMPUTERS_HAND,
       payload: randomHandOptions(),
     })
-    dispatch({ type: Actions.SET_TIMER, payload: true })
+    dispatch({ type: ActionOptions.SET_TIMER, payload: true })
   }
 
   return (
     <div className={s.container}>
       <div className={s.hands}>{handsOnThePage}</div>
-      <button onClick={play} className={s.playBtn}>
+      <button
+        disabled={selectedHand === '' ? true : false}
+        onClick={play}
+        className={s.playBtn}
+      >
         Play
       </button>
     </div>

@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Squirk', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -12,6 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  user-select: none;
 }
 
 a {
@@ -45,11 +46,11 @@ button {
   font-family: inherit;
   background-color: #fff;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.4s ease;
   color: black;
 }
 button:hover {
-  border-color: #646cff;
+  scale: 90%;
 }
 
 @media (prefers-color-scheme: light) {

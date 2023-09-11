@@ -1,40 +1,87 @@
 import { useEffect, useState } from 'react'
 import { useAppContext } from '../context/AppContext'
 import s from './Results.module.css'
-import { Actions } from '../context/reducers/reducerActions'
+import { ActionOptions } from '../context/reducers/reducerActions'
+import { determineTheWinner } from '../utils/determineTheWinner'
 
 const Results = () => {
-  const { state, dispatch } = useAppContext()
+  const { state, hands, dispatch } = useAppContext()
   const { runTimer } = state
   const [time, setTime] = useState<number>(3)
+  const [playersHandDisplay, setPlayersHandDisplay] = useState<string>('')
+
+  const timeSpent = () => {
+    setTime(3)
+    dispatch({ type: ActionOptions.SET_TIMER, payload: false })
+    determineTheWinner(dispatch, state.playerHand, state.computerHand)
+    setPlayersHandDisplay(state.playerHand)
+    dispatch({ type: ActionOptions.CHOOSE_THE_PLAYERS_HAND, payload: '' })
+  }
+
   useEffect(() => {
     if (runTimer) {
       const interval = setInterval(() => {
         setTime((prev) => {
           if (prev === 1) {
             clearInterval(interval)
-            dispatch({ type: Actions.SET_TIMER, payload: false })
-            setTime(3)
           }
           return prev - 1
         })
       }, 1000)
     }
   }, [runTimer])
+
+  useEffect(() => {
+    if (time === 0) {
+      timeSpent()
+    }
+  }, [time])
+
   return (
     <div className={s.container}>
       <div className={s.player}>
         <div className={s.score}>Score</div>
-        <div className={s.title}>Player</div>
-        <div className={s.playerHand}></div>
+        <div className={s.title}>Player: {state.score.player}</div>
+        <div className={s.playerHand}>
+          {runTimer && (
+            <div className={s.playerShakingHand}>{hands[1].icon}</div>
+          )}
+          {!runTimer && state.winner && (
+            <div className={!runTimer ? s.flipped : ''}>
+              {hands.map((hand) =>
+                hand.name == playersHandDisplay ? hand.icon : null
+              )}
+            </div>
+          )}
+        </div>
       </div>
-      <div className={s.timer}>
-        {runTimer && <p data-testid="timer">{time}</p>}
+      <div className={s.middleColumn}>
+        {runTimer && (
+          <p className={s.timer} data-testid="timer">
+            {time}
+          </p>
+        )}
+        {!runTimer && state.winner && (
+          <p className={s.winner} data-testid="winner">
+            {state.winner}
+          </p>
+        )}
       </div>
       <div className={s.computer}>
         <div className={s.score}>Score</div>
-        <div className={s.title}>Computer</div>
-        <div className={s.computerHand}></div>
+        <div className={s.title}>Computer: {state.score.computer}</div>
+        <div className={s.computerHand}>
+          {runTimer && (
+            <div className={`${s.computerShakingHand}`}>{hands[1].icon}</div>
+          )}
+          {!runTimer && state.winner && (
+            <div>
+              {hands.map((hand) =>
+                hand.name == state.computerHand ? hand.icon : null
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
