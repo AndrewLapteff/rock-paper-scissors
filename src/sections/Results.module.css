@@ -81,6 +81,12 @@
   transform-origin: 100% 100%;
   animation: computerShakingHand 0.3s ease-in-out infinite;
 }
+.winnerAnimation1 {
+  animation: winnerAnimation1 2s ease;
+}
+.winnerAnimation2 {
+  animation: winnerAnimation2 2s ease;
+}
 @keyframes playerShaking {
   0%,
   100% {
@@ -97,5 +103,39 @@
   }
   50% {
     transform: scaleY(-1) rotate(-80deg);
+  }
+}
+@keyframes winnerAnimation1 {
+  30% {
+  }
+  40%,
+  60% {
+    transform: rotate(-20deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(20deg) scale(1.1);
+  }
+  70% {
+    transform: rotate(0deg) scale(1.04);
+  }
+  80% {
+    transform: scale(1);
+  }
+}
+@keyframes winnerAnimation2 {
+  30% {
+  }
+  40%,
+  60% {
+    transform: scaleX(-1) rotate(-20deg) scale(1.1);
+  }
+  50% {
+    transform: scaleX(-1) rotate(20deg) scale(1.1);
+  }
+  70% {
+    transform: scaleX(-1) rotate(0deg) scale(1.04);
+  }
+  80% {
+    transform: scaleX(-1) scale(1);
   }
 }

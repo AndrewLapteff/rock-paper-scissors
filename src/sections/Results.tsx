@@ -44,10 +44,20 @@ const Results = () => {
         <div className={s.title}>Player: {state.score.player}</div>
         <div className={s.playerHand}>
           {runTimer && (
-            <div className={s.playerShakingHand}>{hands[1].icon}</div>
+            <div
+              data-testid="playerShakingHand"
+              className={`${s.playerShakingHand}`}
+            >
+              {hands[1].icon}
+            </div>
           )}
           {!runTimer && state.winner && (
-            <div className={!runTimer ? s.flipped : ''}>
+            <div
+              data-testid="playersHandAfterTimerGone"
+              className={`${!runTimer ? s.flipped : ''} ${
+                state.winner == 'Player' ? `${s.winnerAnimation2}` : ''
+              }`}
+            >
               {hands.map((hand) =>
                 hand.name == playersHandDisplay ? hand.icon : null
               )}
@@ -72,10 +82,20 @@ const Results = () => {
         <div className={s.title}>Computer: {state.score.computer}</div>
         <div className={s.computerHand}>
           {runTimer && (
-            <div className={`${s.computerShakingHand}`}>{hands[1].icon}</div>
+            <div
+              data-testid="computerShakingHand"
+              className={`${s.computerShakingHand}`}
+            >
+              {hands[1].icon}
+            </div>
           )}
           {!runTimer && state.winner && (
-            <div>
+            <div
+              data-testid="computersHandAfterTimerGone"
+              className={`${
+                state.winner == 'Computer' ? `${s.winnerAnimation1}` : ''
+              }`}
+            >
               {hands.map((hand) =>
                 hand.name == state.computerHand ? hand.icon : null
               )}
