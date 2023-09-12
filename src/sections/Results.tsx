@@ -55,7 +55,7 @@ const Results = () => {
             <div
               data-testid="playersHandAfterTimerGone"
               className={`${!runTimer ? s.flipped : ''} ${
-                state.winner == 'Player' ? `${s.winnerAnimation2}` : ''
+                state.winner == 'Player' ? `${s.playerWinnerAnimation}` : ''
               }`}
             >
               {hands.map((hand) =>
@@ -93,7 +93,7 @@ const Results = () => {
             <div
               data-testid="computersHandAfterTimerGone"
               className={`${
-                state.winner == 'Computer' ? `${s.winnerAnimation1}` : ''
+                state.winner == 'Computer' ? `${s.computerWinnerAnimation}` : ''
               }`}
             >
               {hands.map((hand) =>

@@ -81,11 +81,11 @@
   transform-origin: 100% 100%;
   animation: computerShakingHand 0.3s ease-in-out infinite;
 }
-.winnerAnimation1 {
-  animation: winnerAnimation1 2s ease;
+.computerWinnerAnimation {
+  animation: computerWinnerAnimation 2s ease;
 }
-.winnerAnimation2 {
-  animation: winnerAnimation2 2s ease;
+.playerWinnerAnimation {
+  animation: playerWinnerAnimation 2s ease;
 }
 @keyframes playerShaking {
   0%,
@@ -105,7 +105,7 @@
     transform: scaleY(-1) rotate(-80deg);
   }
 }
-@keyframes winnerAnimation1 {
+@keyframes computerWinnerAnimation {
   30% {
   }
   40%,
@@ -122,7 +122,7 @@
     transform: scale(1);
   }
 }
-@keyframes winnerAnimation2 {
+@keyframes playerWinnerAnimation {
   30% {
   }
   40%,

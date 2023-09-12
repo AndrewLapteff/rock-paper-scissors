@@ -5,6 +5,18 @@ import RockPaperScissors from './RockPaperScissors'
 import { fireEvent } from '@testing-library/react'
 import { vi } from 'vitest'
 
+vi.mock('../utils/randomHand', () => ({
+  randomHandOptions: () => 'Scissors',
+}))
+
+vi.mock('./Results.module.css', () => {
+  return {
+    default: {
+      playerWinnerAnimation: 'playerWinnerAnimation',
+    },
+  }
+})
+
 describe('Results', () => {
   it('should render 2 seconds on the screen after we wait 1 second', () => {
     vi.useFakeTimers()
@@ -42,7 +54,7 @@ describe('Results', () => {
     expect(screen.getByTestId('timer')).toHaveTextContent('1')
   })
 
-  it('should render that somebody has won after 3 seconds', () => {
+  it('should render that player won after 3 seconds', () => {
     vi.useFakeTimers()
 
     render(
@@ -58,9 +70,51 @@ describe('Results', () => {
     act(() => {
       vi.advanceTimersByTime(3000)
     })
-    expect(screen.getByTestId('winner')).toHaveTextContent(
-      /Player|Computer|Tie/
+    expect(screen.getByTestId('winner')).toHaveTextContent(/Player/)
+    expect(
+      screen.getAllByTestId(/paperHand|rockHand|scissorsHand/)[0]
+    ).toBeVisible()
+  })
+
+  it('should render that computer won after 3 seconds', () => {
+    vi.useFakeTimers()
+
+    render(
+      <ContextProvider>
+        <Results />
+        <RockPaperScissors />
+      </ContextProvider>
     )
+
+    fireEvent.click(screen.getByText('Paper'))
+    fireEvent.click(screen.getByText('Play'))
+
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+    expect(screen.getByTestId('winner')).toHaveTextContent(/Computer/)
+    expect(
+      screen.getAllByTestId(/paperHand|rockHand|scissorsHand/)[0]
+    ).toBeVisible()
+  })
+
+  it('should render that it was tie after 3 seconds', () => {
+    vi.useFakeTimers()
+
+    render(
+      <ContextProvider>
+        <Results />
+        <RockPaperScissors />
+      </ContextProvider>
+    )
+
+    fireEvent.click(screen.getByText('Scissors'))
+    fireEvent.click(screen.getByText('Play'))
+
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+    expect(screen.getByTestId('winner')).toHaveTextContent(/Tie/)
     expect(
       screen.getAllByTestId(/paperHand|rockHand|scissorsHand/)[0]
     ).toBeVisible()
@@ -90,7 +144,7 @@ describe('Results', () => {
     expect(screen.queryByTestId('computerShakingHand')).toBeInTheDocument()
   })
 
-  it('should display hands after timer has gone', () => {
+  it("should displays player's winner animation", () => {
     vi.useFakeTimers()
 
     render(
@@ -107,9 +161,8 @@ describe('Results', () => {
       vi.advanceTimersByTime(3000)
     })
     screen.debug()
-    expect(screen.getByTestId(/playersHandAfterTimerGone/)).toBeInTheDocument()
-    expect(
-      screen.getByTestId(/computersHandAfterTimerGone/)
-    ).toBeInTheDocument()
+    expect(screen.getByTestId(/playersHandAfterTimerGone/)).toHaveClass(
+      'playerWinnerAnimation'
+    )
   })
 })
