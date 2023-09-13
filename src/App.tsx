@@ -1,7 +1,7 @@
 import './App.css'
 import styles from './App.module.css'
 import Results from './sections/Results'
-import RockPaperScissors from './sections/RockPaperScissors'
+import RockPaperScissors from './sections/Hands'
 
 function App() {
   return (

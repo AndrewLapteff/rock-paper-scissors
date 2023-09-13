@@ -1,7 +1,7 @@
 import { act, render, screen } from '@testing-library/react'
 import { ContextProvider } from '../context/AppContext'
 import Results from './Results'
-import RockPaperScissors from './RockPaperScissors'
+import RockPaperScissors from './Hands'
 import { fireEvent } from '@testing-library/react'
 import { vi } from 'vitest'
 
@@ -160,9 +160,38 @@ describe('Results', () => {
     act(() => {
       vi.advanceTimersByTime(3000)
     })
-    screen.debug()
+
     expect(screen.getByTestId(/playersHandAfterTimerGone/)).toHaveClass(
       'playerWinnerAnimation'
     )
+  })
+
+  it("should displays correct player's and computer's scores", () => {
+    vi.useFakeTimers()
+
+    render(
+      <ContextProvider>
+        <Results />
+        <RockPaperScissors />
+      </ContextProvider>
+    )
+
+    fireEvent.click(screen.getByText('Rock'))
+    fireEvent.click(screen.getByText('Play'))
+
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+
+    expect(screen.getByText(/Player: 1/)).toBeInTheDocument()
+
+    fireEvent.click(screen.getByText('Paper'))
+    fireEvent.click(screen.getByText('Play'))
+
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+
+    expect(screen.getByText(/Computer: 1/)).toBeInTheDocument()
   })
 })

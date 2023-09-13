@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 Що отримав
 bun.lockb
+coverage

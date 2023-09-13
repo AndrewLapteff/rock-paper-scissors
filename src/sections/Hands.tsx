@@ -2,7 +2,7 @@ import Hand from '../components/Hand'
 import { useAppContext } from '../context/AppContext'
 import { ActionOptions } from '../context/reducers/reducerActions'
 import { randomHandOptions } from '../utils/randomHand'
-import s from './RockPaperScissors.module.css'
+import s from './Hands.module.css'
 
 const RockPaperScissors = () => {
   const { dispatch, state, hands } = useAppContext()

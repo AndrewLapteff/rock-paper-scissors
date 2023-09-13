@@ -22,8 +22,5 @@ export function scoreReducer(state: StateType, action: ActionTypes) {
     case ActionOptions.TIE: {
       return { ...state, winner: 'Tie' }
     }
-    default: {
-      return { ...state, winner: 'Error' }
-    }
   }
 }

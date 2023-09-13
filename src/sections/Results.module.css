@@ -8,7 +8,6 @@
   border-radius: 10px;
   border: 3px solid black;
 }
-
 .computer svg {
   scale: 170%;
 }
@@ -87,6 +86,12 @@
 .playerWinnerAnimation {
   animation: playerWinnerAnimation 2s ease;
 }
+.timer {
+  animation: timerAnimation 1s ease-out 3;
+}
+.winner {
+  animation: winnerAnimation 0.3s ease-in;
+}
 @keyframes playerShaking {
   0%,
   100% {
@@ -137,5 +142,21 @@
   }
   80% {
     transform: scaleX(-1) scale(1);
+  }
+}
+@keyframes timerAnimation {
+  0% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes winnerAnimation {
+  0% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
   }
 }
